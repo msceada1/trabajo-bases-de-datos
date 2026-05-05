@@ -1,0 +1,93 @@
+#######################################
+# 🔐 Configuración sensible
+#######################################
+config.properties
+*.env
+.env
+secrets.properties
+
+# Ejemplo para compartir sin credenciales
+!config.example.properties
+
+#######################################
+# ☕ Maven
+#######################################
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+#######################################
+# 🧠 IntelliJ IDEA
+#######################################
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Excepción útil (opcional)
+!.idea/codeStyles/
+!.idea/runConfigurations/
+
+#######################################
+# 💻 Otros IDEs (por si acaso)
+#######################################
+.vscode/
+.project
+.classpath
+.settings/
+
+#######################################
+# 🖥️ Sistema operativo
+#######################################
+.DS_Store
+Thumbs.db
+
+#######################################
+# 📦 Logs y temporales
+#######################################
+logs/
+*.log
+*.tmp
+*.temp
+*.swp
+
+#######################################
+# 🧪 Archivos de test / coverage
+#######################################
+coverage/
+*.lcov
+
+#######################################
+# 📦 Archivos compilados Java
+#######################################
+*.class
+*.jar
+*.war
+*.ear
+
+#######################################
+# 🔄 Archivos de backup
+#######################################
+*.bak
+*.backup
+*.old
+
+#######################################
+# 🧬 Archivos de base de datos locales
+#######################################
+*.db
+*.sqlite
+*.h2.db
+
+#######################################
+# 🔑 Certificados / claves
+#######################################
+*.key
+*.pem
+*.crt
+*.p12
