@@ -1,30 +1,24 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class ConexionDB {
-    public static void main(String[] args) throws Exception {
-        String url = "jdbc:mysql://localhost:3306/tienda_vehiculos?serverTimezone=UTC";
-        String usuario, password;
+    private static Connection conexion = null;
 
+    // Privado para evitar instanciación externa (Patrón Singleton)
+    private ConexionDB() {}
+
+    /**
+     * Devuelve una conexión activa a la base de datos.
+     */
+    public static Connection getConnection() throws Exception {
         PropertiesReader p = PropertiesReader.getInstance();
+        String url = "jdbc:mysql://localhost:3306/tienda_vehiculos?serverTimezone=UTC";
 
-        // La conexión se cerrará automáticamente al salir del try
-        try (Connection conexion = DriverManager.getConnection(url, p.get("usuario"), p.get("password"))) {
-
-            System.out.println("¡Conexión establecida con éxito! (se cerrará automáticamente)");
-            // ... usar la conexión ...
-
-        } catch (SQLException e) {
-            System.err.println("Error durante la operación con la base de datos:");
-            e.printStackTrace();
-        } // No se necesita finally para cerrar 'conexion'
-
+        // Si la conexión no existe o está cerrada, creamos una nueva
+        if (conexion == null || conexion.isClosed()) {
+            conexion = DriverManager.getConnection(url, p.get("usuario"), p.get("password"));
+        }
+        return conexion;
     }
 }

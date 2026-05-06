@@ -1,3 +1,5 @@
+package org.example;
+
 public class Vehiculo {
 
     private String matricula;
@@ -68,7 +70,7 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
+        return "org.example.Vehiculo{" +
                 "matricula='" + matricula + '\'' +
                 ", precio=" + precio +
                 ", marca='" + marca + '\'' +
