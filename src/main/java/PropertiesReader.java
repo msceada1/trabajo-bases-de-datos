@@ -1,4 +1,4 @@
-import Exceptions.AppException;
+import exceptions.AppException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
