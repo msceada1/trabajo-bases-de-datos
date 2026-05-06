@@ -65,4 +65,15 @@ public class Vehiculo {
     public int hashCode() {
         return matricula.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "matricula='" + matricula + '\'' +
+                ", precio=" + precio +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", velocidadMax=" + velocidadMax +
+                '}';
+    }
 }
