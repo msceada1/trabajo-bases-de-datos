@@ -1,12 +1,6 @@
 package org.example;
 
-import com.mysql.cj.util.DnsSrv;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.regex.Pattern;
 
 public class Vehiculo {
 
@@ -17,57 +11,56 @@ public class Vehiculo {
     private double velocidadMax;
 
     public Vehiculo(String matricula, double precio, String marca, String modelo, double velocidadMax) {
-        this.matricula = matricula;
-        this.precio = precio;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.velocidadMax = velocidadMax;
-    }
-
-    public String getMatricula() {
-        return matricula;
+        setMatricula(matricula);
+        setPrecio(precio);
+        setMarca(marca);
+        setModelo(modelo);
+        setVelocidadMax(velocidadMax);
     }
 
     public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
+        Pattern patronMatricula = Pattern.compile("^[0-9]{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$");
 
-    public double getPrecio() {
-        return precio;
+
+        if (matricula == null || !patronMatricula.matcher(matricula.toUpperCase()).matches()) {
+            throw new IllegalArgumentException("La matrícula tiene que tener este patrón:(4 números y 3 consonantes)");
+        }
+        this.matricula = matricula.toUpperCase();
     }
 
     public void setPrecio(double precio) {
+        if (precio <= 0) {
+            throw new IllegalArgumentException("El precio debe ser un valor positivo.");
+        }
         this.precio = precio;
     }
 
-    public String getMarca() {
-        return marca;
+    public void setVelocidadMax(double velocidadMax) {
+        if (velocidadMax < 45 || velocidadMax > 500) {
+            throw new IllegalArgumentException("La velocidad máxima debe estar entre 45 y 500 km/h.");
+        }
+        this.velocidadMax = velocidadMax;
     }
 
     public void setMarca(String marca) {
+        if (marca == null || marca.isBlank()) throw new IllegalArgumentException("La marca es obligatoria.");
         this.marca = marca;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
     public void setModelo(String modelo) {
+        if (modelo == null || modelo.isBlank()) throw new IllegalArgumentException("El modelo es obligatorio.");
         this.modelo = modelo;
     }
 
-    public double getVelocidadMax() {
-        return velocidadMax;
-    }
-
-    public void setVelocidadMax(double velocidadMax) {
-        this.velocidadMax = velocidadMax;
-    }
+    public String getMatricula() { return matricula; }
+    public double getPrecio() { return precio; }
+    public String getMarca() { return marca; }
+    public String getModelo() { return modelo; }
+    public double getVelocidadMax() { return velocidadMax; }
 
     @Override
     public final boolean equals(Object o) {
         if (!(o instanceof Vehiculo vehiculo)) return false;
-
         return matricula.equals(vehiculo.matricula);
     }
 
@@ -78,13 +71,6 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
-                "matricula='" + matricula + '\'' +
-                ", precio=" + precio +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", velocidadMax=" + velocidadMax +
-                '}';
+        return "Vehiculo{" + "matricula='" + matricula + "', marca='" + marca + "', velocidadMax=" + velocidadMax + '}';
     }
-
 }
