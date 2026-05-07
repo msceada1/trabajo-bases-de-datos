@@ -9,14 +9,13 @@ public class Venta {
     private LocalDate fechaVenta;
     private String matricula;
     private String formaPago;
-    private String idCliente;
+    private int idCliente;
 
-    public Venta(String codigoVenta, LocalDate fechaVenta, String matricula, String formaPago, String idCliente) {
+    public Venta(String codigoVenta, LocalDate fechaVenta, String matricula, String formaPago) {
         this.codigoVenta = codigoVenta;
         this.fechaVenta = fechaVenta;
         this.matricula = matricula;
         this.formaPago = formaPago;
-        this.idCliente = idCliente;
     }
 
     public String getCodigoVenta() {
@@ -51,11 +50,11 @@ public class Venta {
         this.formaPago = formaPago;
     }
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
