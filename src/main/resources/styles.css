@@ -1,0 +1,83 @@
+/* Configuración general */
+.root {
+    -fx-font-family: "Segoe UI", system-ui;
+    -fx-background-color: #1a1a2e; /* Azul muy oscuro de fondo */
+}
+
+/* Panel de búsqueda (Superior) */
+.header-bar {
+    -fx-background-color: linear-gradient(to right, #16213e, #0f3460);
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 5);
+}
+
+.label {
+    -fx-text-fill: #e94560; /* Rosa vibrante para etiquetas */
+    -fx-font-weight: bold;
+}
+
+/* La Tabla (TableView) */
+.table-view {
+    -fx-background-color: #16213e;
+    -fx-border-color: #0f3460;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
+}
+
+.table-view .column-header {
+    -fx-background-color: #e94560; /* Cabeceras coloridas */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #1a1a2e;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #16213e;
+}
+
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #0f3460;
+    -fx-text-fill: #e94560;
+}
+
+/* Panel del Formulario (Derecha) */
+.form-panel {
+    -fx-background-color: #16213e;
+    -fx-border-color: #e94560;
+    -fx-border-width: 0 0 0 3; /* Solo borde izquierdo rosa */
+    -fx-padding: 20;
+}
+
+/* Campos de texto */
+.text-field {
+    -fx-background-color: #1a1a2e;
+    -fx-text-fill: white;
+    -fx-border-color: #0f3460;
+    -fx-border-radius: 5;
+    -fx-prompt-text-fill: #555;
+}
+
+.text-field:focused {
+    -fx-border-color: #e94560;
+}
+
+/* Botón Guardar */
+.button-save {
+    -fx-background-color: linear-gradient(to bottom, #e94560, #950740);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+}
+
+.button-save:hover {
+    -fx-background-color: #950740;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}

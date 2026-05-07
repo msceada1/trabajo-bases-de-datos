@@ -1,3 +1,5 @@
+import org.example.Vehiculo;
+
 import java.util.List;
 
 public interface VehiculoDAO {
