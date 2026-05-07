@@ -12,7 +12,7 @@ public class Cliente {
     private String apellido2;
     private int edad;
 
-    public Cliente(String nombre, String apellido1, String apellido2, int edad) {
+    public Cliente(String nombre, String apellido1, String apellido2, int edad) throws AppException {
         setNombre(nombre);
         setApellido1(apellido1);
         setApellido2(apellido2);
@@ -31,13 +31,9 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre) throws AppException {
         if (nombre == null || nombre.isBlank()) {
-            try {
-                throw new AppException("ERROR: El cliente debe tener un nombre");
-            } catch (AppException e) {
-                System.err.println(e.getMessage());
-            }
+            throw new AppException("ERROR: El cliente debe tener un nombre");
         }
         this.nombre = nombre;
     }
@@ -46,13 +42,9 @@ public class Cliente {
         return apellido1;
     }
 
-    public void setApellido1(String apellido1) {
+    public void setApellido1(String apellido1) throws AppException {
         if (apellido1 == null || apellido1.isBlank()) {
-            try {
-                throw new AppException("ERROR: El cliente debe tener un primer apellido");
-            } catch (AppException e) {
-                System.err.println(e.getMessage());
-            }
+            throw new AppException("ERROR: El cliente debe tener un primer apellido");
         }
         this.apellido1 = apellido1;
     }
@@ -61,13 +53,9 @@ public class Cliente {
         return apellido2;
     }
 
-    public void setApellido2(String apellido2) {
+    public void setApellido2(String apellido2) throws AppException {
         if (apellido2 == null || apellido2.isBlank()) {
-            try {
-                throw new AppException("ERROR: El cliente debe tener un segundo apellido");
-            } catch (AppException e) {
-                System.err.println(e.getMessage());
-            }
+            throw new AppException("ERROR: El cliente debe tener un segundo apellido");
         }
         this.apellido2 = apellido2;
     }
@@ -76,25 +64,15 @@ public class Cliente {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(int edad) throws AppException {
         if (edad < 16) {
-            try {
-                throw new AppException("ERROR: La edad debe ser mayor o igual a 16");
-            } catch (AppException e) {
-                System.err.println(e.getMessage());
-            }
+            throw new AppException("ERROR: La edad debe ser mayor o igual a 16");
         }
     }
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "idCliente='" + idCliente + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido1='" + apellido1 + '\'' +
-                ", apellido2='" + apellido2 + '\'' +
-                ", edad=" + edad +
-                '}';
+        return "Cliente{" + "idCliente='" + idCliente + '\'' + ", nombre='" + nombre + '\'' + ", apellido1='" + apellido1 + '\'' + ", apellido2='" + apellido2 + '\'' + ", edad=" + edad + '}';
     }
 
     @Override
