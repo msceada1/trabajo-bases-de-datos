@@ -42,7 +42,7 @@ public class VehiculoDAOMySQL implements VehiculoDAO {
                             rs.getDouble("precio"),
                             rs.getString("marca"),
                             rs.getString("modelo"),
-                            rs.getDouble("velocidadMax")
+                            rs.getDouble("velocidad_max")
                     );
                 }
             }
@@ -67,7 +67,7 @@ public class VehiculoDAOMySQL implements VehiculoDAO {
                         rs.getDouble("precio"),
                         rs.getString("marca"),
                         rs.getString("modelo"),
-                        rs.getDouble("velocidadMax")
+                        rs.getDouble("velocidad_max")
                 );
                 lista.add(v);
             }

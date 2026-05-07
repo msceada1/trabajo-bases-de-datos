@@ -4,30 +4,30 @@ import java.util.Objects;
 
 public class Cliente {
 
-    private String idCliente;
+    private int idCliente;
     private String nombre;
     private String apellido1;
     private String apellido2;
     private int edad;
 
-    public Cliente(String idCliente, String nombre, String apellido1, String apellido2, int edad) {
-        this.idCliente = idCliente;
+    public Cliente(String nombre, String apellido1, String apellido2, int edad) {
+
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.edad = edad;
     }
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
-    }
-
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
     }
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public void setNombre(String nombre) {
