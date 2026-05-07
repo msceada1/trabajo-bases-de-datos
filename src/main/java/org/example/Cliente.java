@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.exceptions.AppException;
+
 import java.util.Objects;
 
 public class Cliente {
@@ -11,11 +13,10 @@ public class Cliente {
     private int edad;
 
     public Cliente(String nombre, String apellido1, String apellido2, int edad) {
-
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.edad = edad;
+        setNombre(nombre);
+        setApellido1(apellido1);
+        setApellido2(apellido2);
+        setEdad(edad);
     }
 
     public int getIdCliente() {
@@ -31,6 +32,13 @@ public class Cliente {
     }
 
     public void setNombre(String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            try {
+                throw new AppException("ERROR: El cliente debe tener un nombre");
+            } catch (AppException e) {
+                System.err.println(e.getMessage());
+            }
+        }
         this.nombre = nombre;
     }
 
@@ -39,6 +47,13 @@ public class Cliente {
     }
 
     public void setApellido1(String apellido1) {
+        if (apellido1 == null || apellido1.isBlank()) {
+            try {
+                throw new AppException("ERROR: El cliente debe tener un primer apellido");
+            } catch (AppException e) {
+                System.err.println(e.getMessage());
+            }
+        }
         this.apellido1 = apellido1;
     }
 
@@ -47,6 +62,13 @@ public class Cliente {
     }
 
     public void setApellido2(String apellido2) {
+        if (apellido2 == null || apellido2.isBlank()) {
+            try {
+                throw new AppException("ERROR: El cliente debe tener un segundo apellido");
+            } catch (AppException e) {
+                System.err.println(e.getMessage());
+            }
+        }
         this.apellido2 = apellido2;
     }
 
@@ -55,7 +77,13 @@ public class Cliente {
     }
 
     public void setEdad(int edad) {
-        this.edad = edad;
+        if (edad < 16) {
+            try {
+                throw new AppException("ERROR: La edad debe ser mayor o igual a 16");
+            } catch (AppException e) {
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
     @Override
