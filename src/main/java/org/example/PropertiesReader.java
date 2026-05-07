@@ -1,6 +1,6 @@
 package org.example;
 
-import exceptions.AppException;
+import org.example.exceptions.AppException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
