@@ -1,5 +1,13 @@
 package org.example;
 
+import com.mysql.cj.util.DnsSrv;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vehiculo {
 
     private String matricula;
@@ -70,7 +78,7 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "org.example.Vehiculo{" +
+        return "Vehiculo{" +
                 "matricula='" + matricula + '\'' +
                 ", precio=" + precio +
                 ", marca='" + marca + '\'' +
@@ -78,4 +86,5 @@ public class Vehiculo {
                 ", velocidadMax=" + velocidadMax +
                 '}';
     }
+
 }
