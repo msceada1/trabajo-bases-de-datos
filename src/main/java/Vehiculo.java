@@ -1,4 +1,6 @@
-public class Vehiculo {
+import java.util.List;
+
+public class Vehiculo implements VehiculoDAO{
 
     private String matricula;
     private double precio;
@@ -75,5 +77,30 @@ public class Vehiculo {
                 ", modelo='" + modelo + '\'' +
                 ", velocidadMax=" + velocidadMax +
                 '}';
+    }
+
+    @Override
+    public void insertar(Vehiculo vehiculo) {
+        String sql;
+    }
+
+    @Override
+    public Vehiculo obtenerPorMatricula(String matricula) {
+        return null;
+    }
+
+    @Override
+    public List<Vehiculo> listarVehiculos() {
+        return List.of();
+    }
+
+    @Override
+    public void actualizar(Vehiculo vehiculo) {
+
+    }
+
+    @Override
+    public void eliminar(String matricula) {
+
     }
 }
