@@ -1,3 +1,5 @@
+package org.example;
+
 import exceptions.AppException;
 
 import java.io.BufferedReader;
