@@ -4,24 +4,20 @@ import java.util.Objects;
 
 public class Cliente {
 
-    private String idCliente;
+    private int idCliente;
     private String nombre;
     private String apellido1;
     private String apellido2;
     private int edad;
 
-    public Cliente(String idCliente, String nombre, String apellido1, String apellido2, int edad) {
-        setIdCliente(idCliente);
+    public Cliente(String nombre, String apellido1, String apellido2, int edad) {
         setNombre(nombre);
         setApellido1(apellido1);
         setApellido2(apellido2);
         setEdad(edad);
     }
 
-    public void setIdCliente(String idCliente) {
-        if (idCliente == null || idCliente.isBlank()) {
-            throw new IllegalArgumentException("El ID del cliente no puede estar vacío.");
-        }
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -46,14 +42,14 @@ public class Cliente {
     }
 
     public void setEdad(int edad) {
-        if (edad < 18 || edad > 120) {
-            throw new IllegalArgumentException("El cliente debe ser mayor de edad (18+).");
+        if (edad < 16) {
+            throw new IllegalArgumentException("El cliente debe ser mayor de edad (16+).");
         }
         this.edad = edad;
     }
 
 
-    public String getIdCliente() { return idCliente; }
+    public int getIdCliente() { return idCliente; }
     public String getNombre() { return nombre; }
     public String getApellido1() { return apellido1; }
     public String getApellido2() { return apellido2; }
