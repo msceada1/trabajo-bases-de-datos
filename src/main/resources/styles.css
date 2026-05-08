@@ -33,6 +33,11 @@
     -fx-text-fill: white;
 }
 
+/* Color del texto dentro de las celdas de la tabla para que se vea con el fondo oscuro */
+.table-view .table-cell {
+    -fx-text-fill: white;
+}
+
 .table-view .table-row-cell:odd {
     -fx-background-color: #1a1a2e;
 }
@@ -41,8 +46,13 @@
     -fx-background-color: #16213e;
 }
 
+/* Color de fondo de la fila seleccionada */
 .table-view .table-row-cell:filled:selected {
     -fx-background-color: #0f3460;
+}
+
+/* Color del texto de las celdas cuando la fila está seleccionada */
+.table-view .table-row-cell:filled:selected .table-cell {
     -fx-text-fill: #e94560;
 }
 
