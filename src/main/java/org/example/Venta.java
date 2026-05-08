@@ -10,14 +10,14 @@ import java.util.regex.Pattern;
 public class Venta {
 
     private static final Pattern PATRON_MATRICULA = Pattern.compile("^[0-9]{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$");
-    private static final Pattern PATRON_FECHA = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[0-2])[-/](19[0-9]{2}|20[0-1][0-9]|202[0-5]|2026)$");
+    // Se ha eliminado PATRON_FECHA porque usar LocalDate ya hace que sea imposible tener fechas inválidas (como 32/13/2026)
     private static final List<String> FORMAS_PAGO = List.of("Efectivo", "Transferencia", "Bizum", "A plazos");
 
     private int codigoVenta;
     private LocalDate fechaVenta;
     private String matricula;
     private String formaPago;
-    private int idCliente;
+    private int id_cliente;
 
     public Venta(LocalDate fechaVenta, String matricula, String formaPago) throws AppException {
         setFechaVenta(fechaVenta);
@@ -38,10 +38,18 @@ public class Venta {
     }
 
     public void setFechaVenta(LocalDate fechaVenta) throws AppException {
-
-        if (fechaVenta == null || !PATRON_FECHA.matcher(fechaVenta.toString()).matches()) {
-            throw new AppException("Fallo en el registro de fecha, sigue el patron dd/mm/yyyy");
+        // Solo necesitamos comprobar que la fecha no venga nula
+        if (fechaVenta == null) {
+            throw new AppException("ERROR: La fecha de venta no puede estar vacía.");
         }
+
+        // Opcional: Descomenta estas líneas si quieres evitar que registren ventas en el futuro
+        /*
+        if (fechaVenta.isAfter(LocalDate.now())) {
+            throw new AppException("ERROR: La fecha de venta no puede ser en el futuro.");
+        }
+        */
+
         this.fechaVenta = fechaVenta;
     }
 
@@ -62,17 +70,17 @@ public class Venta {
 
     public void setFormaPago(String formaPago) throws AppException {
         if (!FORMAS_PAGO.contains(formaPago)) {
-            throw new AppException("La forma de pago debe ser una de las siguientes: Efectivo, Transferencia, Bizum. A plazos");
+            throw new AppException("La forma de pago debe ser una de las siguientes: Efectivo, Transferencia, Bizum, A plazos");
         }
         this.formaPago = formaPago;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     @Override
@@ -93,7 +101,7 @@ public class Venta {
                 ", fechaVenta=" + fechaVenta +
                 ", matricula='" + matricula + '\'' +
                 ", formaPago='" + formaPago + '\'' +
-                ", idCliente='" + idCliente + '\'' +
+                ", id_cliente='" + id_cliente + '\'' +
                 '}';
     }
 }

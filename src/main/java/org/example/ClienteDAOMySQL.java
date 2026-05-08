@@ -17,8 +17,8 @@ public class ClienteDAOMySQL implements ClienteDAO {
 
             // Rellenamos los interrogantes con los getters del cliente
             ps.setString(1, c.getNombre());
-            ps.setString(2, c.getApellido1());
-            ps.setString(3, c.getApellido2());
+            ps.setString(2, c.getApellido_1());
+            ps.setString(3, c.getApellido_2());
             ps.setInt(4, c.getEdad());
 
             ps.executeUpdate();
@@ -29,7 +29,7 @@ public class ClienteDAOMySQL implements ClienteDAO {
     }
 
     @Override
-    public Cliente obtenerPorNombreCompleto(String nombre, String apellido1, String apellido2) {
+    public Cliente obtenerPorNombreCompleto(String nombre, String apellido_1, String apellido_2) {
         Cliente cliente = null;
         // El SQL es el mismo: queremos todas las columnas (*) de los que coincidan con el nombre
         String sql = "SELECT * FROM cliente WHERE nombre = ? AND apellido_1 = ? AND apellido_2 = ?";
@@ -38,22 +38,22 @@ public class ClienteDAOMySQL implements ClienteDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, nombre);
-            ps.setString(2, apellido1);
-            ps.setString(3, apellido2);
+            ps.setString(2, apellido_1);
+            ps.setString(3, apellido_2);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     // 1. Creamos el objeto con el constructor que ya tienes (sin ID)
                     cliente = new Cliente(
                             rs.getString("nombre"),
-                            rs.getString("apellido1"),
-                            rs.getString("apellido2"),
+                            rs.getString("apellido_1"),
+                            rs.getString("apellido_2"),
                             rs.getInt("edad")
                     );
 
                     // 2. USAMOS EL NUEVO SETTER:
-                    // Ahora recuperamos el ID de la columna "idCliente" y se lo asignamos al objeto
-                    cliente.setIdCliente(rs.getInt("idCliente"));
+                    // Ahora recuperamos el ID de la columna id_iente" y se lo asignamos al objeto
+                    cliente.setId_cliente(rs.getInt("id_cliente"));
                 }
             }
         } catch (Exception e) {
@@ -78,12 +78,12 @@ public class ClienteDAOMySQL implements ClienteDAO {
                 // 1. Creamos el cliente con los datos básicos
                 Cliente c = new Cliente(
                         rs.getString("nombre"),
-                        rs.getString("apellido1"),
-                        rs.getString("apellido2"),
+                        rs.getString("apellido_1"),
+                        rs.getString("apellido_2"),
                         rs.getInt("edad")
                 );
 
-                c.setIdCliente(rs.getInt("idCliente"));
+                c.setId_cliente(rs.getInt("id_cliente"));
 
                 // 3. Lo añadimos a nuestra lista de Java
                 lista.add(c);
@@ -96,16 +96,16 @@ public class ClienteDAOMySQL implements ClienteDAO {
 
     @Override
     public void actualizar(Cliente c) {
-        String sql = "UPDATE cliente SET nombre = ?, apellido1 = ?, apellido2 = ?, edad = ? WHERE idCliente = ?";
+        String sql = "UPDATE cliente SET nombre = ?, apellido_1 = ?, apellido_2 = ?, edad = ? WHERE id_cliente = ?";
 
         try (Connection conn = ConexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, c.getNombre());
-            ps.setString(2, c.getApellido1());
-            ps.setString(3, c.getApellido2());
+            ps.setString(2, c.getApellido_1());
+            ps.setString(3, c.getApellido_2());
             ps.setInt(4, c.getEdad());
-            ps.setInt(5, c.getIdCliente());
+            ps.setInt(5, c.getId_cliente());
 
             ps.executeUpdate();
 
@@ -115,15 +115,15 @@ public class ClienteDAOMySQL implements ClienteDAO {
     }
 
     @Override
-    public void eliminarPorNombreCompleto(String nombre, String apellido1, String apellido2) {
+    public void eliminarPorNombreCompleto(String nombre, String apellido_1, String apellido_2) {
         // 1. Obtenemos el cliente (asegúrate de que en este método el SQL use 'apellido_1' y 'apellido_2')
-        Cliente cliente = obtenerPorNombreCompleto(nombre, apellido1, apellido2);
+        Cliente cliente = obtenerPorNombreCompleto(nombre, apellido_1, apellido_2);
 
         if (cliente == null) {
             return;
         }
 
-        int idCliente = cliente.getIdCliente();
+        int id_cliente = cliente.getId_cliente();
 
         // Consultas SQL con los nombres EXACTOS de tu imagen
         String sqlSelectMatriculas = "SELECT matricula FROM venta WHERE id_cliente = ?";
@@ -142,7 +142,7 @@ public class ClienteDAOMySQL implements ClienteDAO {
             // PASO 1: Rescatar las matrículas ANTES de borrar las ventas
             List<String> matriculasAEliminar = new ArrayList<>();
             try (PreparedStatement psSelect = conn.prepareStatement(sqlSelectMatriculas)) {
-                psSelect.setInt(1, idCliente);
+                psSelect.setInt(1, id_cliente);
                 try (ResultSet rs = psSelect.executeQuery()) {
                     while (rs.next()) {
                         // Guardamos las matrículas en la lista de Java
@@ -153,7 +153,7 @@ public class ClienteDAOMySQL implements ClienteDAO {
 
             // PASO 2: Borramos las VENTAS (Liberamos las claves foráneas)
             try (PreparedStatement psVenta = conn.prepareStatement(sqlDeleteVentas)) {
-                psVenta.setInt(1, idCliente);
+                psVenta.setInt(1, id_cliente);
                 psVenta.executeUpdate();
             }
 
@@ -171,7 +171,7 @@ public class ClienteDAOMySQL implements ClienteDAO {
 
             // PASO 4: Borramos el CLIENTE
             try (PreparedStatement psCliente = conn.prepareStatement(sqlDeleteCliente)) {
-                psCliente.setInt(1, idCliente);
+                psCliente.setInt(1, id_cliente);
                 psCliente.executeUpdate();
             }
 

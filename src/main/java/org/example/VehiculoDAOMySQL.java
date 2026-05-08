@@ -9,7 +9,7 @@ import java.util.List;
 public class VehiculoDAOMySQL implements VehiculoDAO {
     @Override
     public void insertar(Vehiculo v) {
-        String sql = "INSERT INTO vehiculo (matricula, precio, marca, modelo, velocidadMax) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vehiculo (matricula, precio, marca, modelo, velocidad_max) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection c = ConexionDB.getConnection();
              PreparedStatement ps = c.prepareStatement(sql);) {
@@ -18,7 +18,7 @@ public class VehiculoDAOMySQL implements VehiculoDAO {
             ps.setDouble(2, v.getPrecio());
             ps.setString(3, v.getMarca());
             ps.setString(4, v.getModelo());
-            ps.setDouble(5, v.getVelocidadMax());
+            ps.setDouble(5, v.getVelocidad_max());
 
             ps.executeUpdate();
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class VehiculoDAOMySQL implements VehiculoDAO {
 
     @Override
     public void actualizar(Vehiculo vehiculo) {
-        String sql = "UPDATE vehiculo SET precio = ?, marca = ?, modelo = ?, velocidadMax = ? WHERE matricula = ?";
+        String sql = "UPDATE vehiculo SET precio = ?, marca = ?, modelo = ?, velocidad_max = ? WHERE matricula = ?";
 
         try (Connection c = ConexionDB.getConnection();
              PreparedStatement ps = c.prepareStatement(sql)) {
@@ -87,7 +87,7 @@ public class VehiculoDAOMySQL implements VehiculoDAO {
             ps.setDouble(1, vehiculo.getPrecio());
             ps.setString(2, vehiculo.getMarca());
             ps.setString(3, vehiculo.getModelo());
-            ps.setDouble(4, vehiculo.getVelocidadMax());
+            ps.setDouble(4, vehiculo.getVelocidad_max());
             ps.setString(5, vehiculo.getMatricula());
 
             ps.executeUpdate();

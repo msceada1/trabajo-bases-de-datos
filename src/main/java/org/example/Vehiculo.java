@@ -1,13 +1,7 @@
 package org.example;
 
-import com.mysql.cj.util.DnsSrv;
 import org.example.exceptions.AppException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class Vehiculo {
@@ -18,14 +12,14 @@ public class Vehiculo {
     private double precio;
     private String marca;
     private String modelo;
-    private double velocidadMax;
+    private double velocidad_max;
 
-    public Vehiculo(String matricula, double precio, String marca, String modelo, double velocidadMax) throws AppException {
+    public Vehiculo(String matricula, double precio, String marca, String modelo, double velocidad_max) throws AppException {
         setMatricula(matricula);
         setPrecio(precio);
         setMarca(marca);
         setModelo(modelo);
-        setVelocidadMax(velocidadMax);
+        setVelocidad_max(velocidad_max);
     }
 
     public String getMatricula() {
@@ -72,15 +66,15 @@ public class Vehiculo {
         this.modelo = modelo;
     }
 
-    public double getVelocidadMax() {
-        return velocidadMax;
+    public double getVelocidad_max() {
+        return velocidad_max;
     }
 
-    public void setVelocidadMax(double velocidadMax) throws AppException {
-        if (velocidadMax < 30) {
+    public void setVelocidad_max(double velocidad_max) throws AppException {
+        if (velocidad_max < 30) {
             throw new AppException("ERROR: El vehiculo debe tener una velocidad minima de 30");
         }
-        this.velocidadMax = velocidadMax;
+        this.velocidad_max = velocidad_max;
     }
 
     @Override
@@ -102,7 +96,7 @@ public class Vehiculo {
                 ", precio=" + precio +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
-                ", velocidadMax=" + velocidadMax +
+                ", velocidadMax=" + velocidad_max +
                 '}';
     }
 

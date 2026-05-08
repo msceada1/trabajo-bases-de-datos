@@ -60,7 +60,7 @@
     -fx-text-fill: white;
     -fx-border-color: #0f3460;
     -fx-border-radius: 5;
-    -fx-prompt-text-fill: #555;
+    -fx-prompt-text-fill: #e8e1e1;
 }
 
 .text-field:focused {

@@ -19,12 +19,14 @@ public class VentaDAOMySQL implements VentaDAO {
             ps.setDate(1, java.sql.Date.valueOf(v.getFechaVenta()));
             ps.setString(2, v.getMatricula());
             ps.setString(3, v.getFormaPago());
-            ps.setInt(4, v.getIdCliente());
+            ps.setInt(4, v.getId_cliente());
 
             ps.executeUpdate();
 
         } catch (Exception e) {
             System.err.println("Error al insertar la venta: " + e.getMessage());
+            // Lanzamos el error para que JavaFX se entere y no añada ventas fantasma
+            throw new RuntimeException("Fallo en Base de Datos: Comprueba que la matrícula y el ID del cliente existan realmente.");
         }
     }
 
@@ -47,7 +49,7 @@ public class VentaDAOMySQL implements VentaDAO {
                     );
 
                     venta.setCodigoVenta(rs.getInt("codigo_venta"));
-                    venta.setIdCliente(rs.getInt("id_cliente"));
+                    venta.setId_cliente(rs.getInt("id_cliente"));
                 }
             }
         } catch (Exception e) {
@@ -74,7 +76,7 @@ public class VentaDAOMySQL implements VentaDAO {
                 );
 
                 v.setCodigoVenta(rs.getInt("codigo_venta"));
-                v.setIdCliente(rs.getInt("id_cliente"));
+                v.setId_cliente(rs.getInt("id_cliente"));
 
                 listaVentas.add(v);
             }
@@ -95,7 +97,7 @@ public class VentaDAOMySQL implements VentaDAO {
             ps.setDate(1, java.sql.Date.valueOf(v.getFechaVenta()));
             ps.setString(2, v.getMatricula());
             ps.setString(3, v.getFormaPago());
-            ps.setInt(4, v.getIdCliente());
+            ps.setInt(4, v.getId_cliente());
 
             ps.setInt(5, v.getCodigoVenta());
 
@@ -103,6 +105,7 @@ public class VentaDAOMySQL implements VentaDAO {
 
         } catch (Exception e) {
             System.err.println("Error al actualizar la venta: " + e.getMessage());
+            throw new RuntimeException("Fallo en BD al actualizar: Comprueba matrícula e ID.");
         }
     }
 

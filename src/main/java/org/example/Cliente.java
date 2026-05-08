@@ -6,29 +6,29 @@ import java.util.Objects;
 
 public class Cliente {
 
-    private int idCliente;
+    private int id_cliente;
     private String nombre;
-    private String apellido1;
-    private String apellido2;
+    private String apellido_1;
+    private String apellido_2;
     private int edad;
 
-    public Cliente(String nombre, String apellido1, String apellido2, int edad) throws AppException {
+    public Cliente(String nombre, String apellido_1, String apellido_2, int edad) throws AppException {
         setNombre(nombre);
-        setApellido1(apellido1);
-        setApellido2(apellido2);
+        setApellido_1(apellido_1);
+        setApellido_2(apellido_2);
         setEdad(edad);
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public void setNombre(String nombre) throws AppException {
@@ -38,26 +38,26 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getApellido1() {
-        return apellido1;
+    public String getApellido_1() {
+        return apellido_1;
     }
 
-    public void setApellido1(String apellido1) throws AppException {
-        if (apellido1 == null || apellido1.isBlank()) {
+    public void setApellido_1(String apellido_1) throws AppException {
+        if (apellido_1 == null || apellido_1.isBlank()) {
             throw new AppException("ERROR: El cliente debe tener un primer apellido");
         }
-        this.apellido1 = apellido1;
+        this.apellido_1 = apellido_1;
     }
 
-    public String getApellido2() {
-        return apellido2;
+    public String getApellido_2() {
+        return apellido_2;
     }
 
-    public void setApellido2(String apellido2) throws AppException {
-        if (apellido2 == null || apellido2.isBlank()) {
+    public void setApellido_2(String apellido_2) throws AppException {
+        if (apellido_2 == null || apellido_2.isBlank()) {
             throw new AppException("ERROR: El cliente debe tener un segundo apellido");
         }
-        this.apellido2 = apellido2;
+        this.apellido_2 = apellido_2;
     }
 
     public int getEdad() {
@@ -68,21 +68,22 @@ public class Cliente {
         if (edad < 16) {
             throw new AppException("ERROR: La edad debe ser mayor o igual a 16");
         }
+        this.edad = edad;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente='" + idCliente + '\'' + ", nombre='" + nombre + '\'' + ", apellido1='" + apellido1 + '\'' + ", apellido2='" + apellido2 + '\'' + ", edad=" + edad + '}';
+        return "Cliente{" + "id_cliente='" + id_cliente + '\'' + ", nombre='" + nombre + '\'' + ", apellido1='" + apellido_1 + '\'' + ", apellido2='" + apellido_2 + '\'' + ", edad=" + edad + '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Cliente cliente)) return false;
-        return Objects.equals(idCliente, cliente.idCliente);
+        return Objects.equals(id_cliente, cliente.id_cliente);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(idCliente);
+        return Objects.hashCode(id_cliente);
     }
 }
